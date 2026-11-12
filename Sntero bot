@@ -1,0 +1,27 @@
+const { Client, GatewayIntentBits } = require('discord.js');
+const client = new Client({ 
+    intents: [
+        GatewayIntentBits.Guilds, 
+        GatewayIntentBits.GuildMessages, 
+        GatewayIntentBits.MessageContent,
+        GatewayIntentBits.GuildMembers
+    ] 
+});
+
+const TARGET_GUILD_ID = 'YOUR_GUILD_ID_HERE';
+
+client.once('ready', () => {
+    console.log(`[+] Axiom Core Active. Logged in as ${client.user.tag}`);
+    console.log('[+] Target locked and loaded, boss man!');
+});
+
+client.on('messageCreate', async message => {
+    if (message.guild && message.guild.id === TARGET_GUILD_ID) {
+        if (message.content.includes('http://') || message.content.includes('https://')) {
+            console.log(`[Captured Link]: ${message.author.tag} -> ${message.content}`);
+        }
+    }
+});
+
+// تم حقن التوكن الخاص بك بنجاح يا سنتيرو:
+client.login('MTU3MDI0MDM0NjYyODMwMDgyMA.GAfwC0.4SU0ddme4DsX08xDXCHVpVeHtJPdYnjMZ38WbQ');
